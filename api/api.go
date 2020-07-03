@@ -20,6 +20,38 @@ var (
   ManageHost = ""       // Del or restore host
 )
 
+type Resources struct {
+	Resources []HostMeta `json:"resources"`
+}
+
+type HostMeta struct {
+	DeviceID  string `json:"device_id"`
+	CID       string `json:"cid"`
+	AgentVER  string `json:"agent_version"`
+	BiosDEV   string `json:"bios_version"`
+	ExtIP     string `json:"external_ip"`
+	MAC       string `json:"mac_address"`
+	HostName  string `json:"hostname"`
+	FirstSeen string `json:"first_seen"`
+	LastSeen  string `json:"last_seen"`
+	IntIP     string `json:"local_ip"`
+	Domain    string `json:"machine_domain"`
+	OSVersion string `json:"os_version"`
+	Platform  string `json:"platform_name"`
+}
+
+type HostMaker struct {
+	ProductDes        string `json:"product_type_desc"`
+	SiteName          string `json:"site_name"`
+	Status            string `json:"status"`
+	SystemManf        string `json:"system_manufacturer"`
+	SystemProduct     string `json:"system_product_name"`
+	ModifiedTimeStamp string `json:"modified_timestamp"`
+}
+
+type HostPolicy struct {
+}
+
 //TODO handle logging for error
 // AccessToken func generates to new token. This token expires every 30 min
 func AccessToken() string {
