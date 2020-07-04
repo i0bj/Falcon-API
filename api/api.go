@@ -20,15 +20,27 @@ var (
   ManageHost = ""       // Del or restore host
 )
 
-type Resources struct {
+type HostResp struct {
 	Resources []HostMeta `json:"resources"`
+	Meta      []Meta
+}
+type Meta struct {
+	QueryTime uint32 `json:"query_time"`
+	PoweredBy string `json:"powered_by"`
+	TraceID   string `json:"trace_id"`
 }
 
 type HostMeta struct {
 	DeviceID  string `json:"device_id"`
 	CID       string `json:"cid"`
+	AgentLoad string `json:"agent_load_flags"`
+	AgentTime string `json:"agent_local_time"`
 	AgentVER  string `json:"agent_version"`
-	BiosDEV   string `json:"bios_version"`
+	BiosDEV   string `json:"bios_manufacturer"`
+	BiosVER   string `json:"bios_version"`
+	ConfBase  string `json:"config_id_base"`
+	ConfBuild string `json:"config_id_build"`
+	ConfPlat  string `json:"config_id_platform"`
 	ExtIP     string `json:"external_ip"`
 	MAC       string `json:"mac_address"`
 	HostName  string `json:"hostname"`
@@ -37,19 +49,27 @@ type HostMeta struct {
 	IntIP     string `json:"local_ip"`
 	Domain    string `json:"machine_domain"`
 	OSVersion string `json:"os_version"`
+	PlatID    string `json:"platform_id"`
 	Platform  string `json:"platform_name"`
 }
 
+type HostPolicy struct {
+	PolicyType   string `json:"policy_type"`
+	PolicyID     string `json:"policy_id"`
+	Applied      bool   `json:"applied"`
+	SettingsHash string `json:"settings_hash"`
+	AssignedDate string `json:"assigned_date"`
+	AppliedDate  string `json:"applied_date"`
+}
+
 type HostMaker struct {
+	ProductType       string `json:"product_type"`
 	ProductDes        string `json:"product_type_desc"`
 	SiteName          string `json:"site_name"`
 	Status            string `json:"status"`
 	SystemManf        string `json:"system_manufacturer"`
 	SystemProduct     string `json:"system_product_name"`
 	ModifiedTimeStamp string `json:"modified_timestamp"`
-}
-
-type HostPolicy struct {
 }
 
 //TODO handle logging for error
