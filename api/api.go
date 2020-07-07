@@ -117,7 +117,7 @@ func AccessToken() string {
 
 }
 
-func HostData() *HostSearch {
+func FindHost() *HostSearch {
 	params := url.Values{}
 	params.Add("filter", "platform_name: 'Mac'")
 
