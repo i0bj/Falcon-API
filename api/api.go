@@ -119,3 +119,37 @@ func AccessToken() string {
 
 }
 
+func HostData() *HostSearch {
+	params := url.Values{}
+	params.Add("filter", "platform_name: 'Mac'")
+
+	req, err := http.NewRequest("GET", BaseURL+FindAID+params.Encode(), nil)
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Authorization", " Bearer <token>") 
+	//refresh token
+	if err != nil {
+		f, _ := os.Create(`C:\temp\CrowdstrikeLogs\log.txt`)
+		log.Println("Error: ", err)
+		log.SetOutput(f)
+	}
+	fmt.Println(req)
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Println("Error: ", err)
+	}
+	defer resp.Body.Close()
+
+	respBody, err := ioutil.ReadAll(resp.Body)
+	// variable holding the struct to which the json response will be placed in.
+	//var ret string
+	var ret HostSearch
+	if err := json.Unmarshal(respBody, &ret); err != nil {
+		fmt.Println(err)
+	}
+
+	//fmt.Printf("Host: %s, MAC: %s", ret.HostName, ret.Domain)
+	//return string(respBody)
+	return &ret
+}
+
