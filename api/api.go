@@ -16,8 +16,6 @@ var (
 	FindAID   = ""  // Get agent ID
 	HostInfo  = "" // Get host info
 	AuthToken = ""// Request or Revoke Token
-	Token     = os.Getenv("TOKEN")
-  ManageHost = ""       // Del or restore host
 )
 // HostSearch struct will hold the host ID which can be used for additional queries.
 type HostSearch struct {
