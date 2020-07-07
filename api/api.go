@@ -19,10 +19,9 @@ var (
 	Token     = os.Getenv("TOKEN")
   ManageHost = ""       // Del or restore host
 )
-
-type HostResp struct {
-	Resources []HostMeta `json:"resources"`
-	Meta      []Meta
+// HostSearch struct will hold the host ID which can be used for additional queries.
+type HostSearch struct {
+	Resources []string `json:"resources"`
 }
 type Meta struct {
 	QueryTime uint32 `json:"query_time"`
