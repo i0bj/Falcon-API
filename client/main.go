@@ -8,6 +8,6 @@ import (
 func main() {
 
 	//fmt.Println(api.AccessToken())
-	fmt.Println(api.HostData())
+	fmt.Println(api.FindHost())
 
 }
