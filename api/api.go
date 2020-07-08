@@ -117,9 +117,9 @@ func AccessToken() string {
 
 }
 
-func FindHost() *HostSearch {
+func FindHost(q string) *HostSearch {
 	params := url.Values{}
-	params.Add("filter", "platform_name: 'Mac'")
+	params.Add("filter", fmt.Sprintf("platform_name: '%s'", q))
 
 	req, err := http.NewRequest("GET", BaseURL+FindAID+params.Encode(), nil)
 	req.Header.Set("Accept", "application/json")
