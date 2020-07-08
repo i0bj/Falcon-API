@@ -8,6 +8,6 @@ import (
 func main() {
 
 	//fmt.Println(api.AccessToken())
-	fmt.Println(api.FindHost())
+	fmt.Println(api.FindHost("Mac"))
 
 }
