@@ -11,7 +11,7 @@ import (
 )
 
 // Defined variables for communication between api endpoints
-var (
+const (
 	BaseURL   = ""  // Base API URL
 	FindAID   = ""  // Get agent ID
 	HostInfo  = "" // Get host info
