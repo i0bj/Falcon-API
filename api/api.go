@@ -17,6 +17,12 @@ const (
 	HostInfo  = "" // Get host info
 	AuthToken = ""// Request or Revoke Token
 )
+
+type Token struct {
+	MainToken string `json:"access_token"`
+	ExpiresIn int    `json:"expires_in"`
+}
+
 // HostSearch struct will hold the host ID which can be used for additional queries.
 type HostSearch struct {
 	Resources []string `json:"resources"`
