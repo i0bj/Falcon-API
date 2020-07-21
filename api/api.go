@@ -98,7 +98,7 @@ func AccessToken() (*Token, error) {
 	}
 	defer resp.Body.Close()
 
-	// Data contains the body of the response, in this case the auth token
+	// tok contains the body of the response, in this case the auth token and unmarshalled into the Token struct.
 	var tok Token
 	if err := json.NewDecoder(resp.Body).Decode(&tok); err != nil {
 		return nil, err
