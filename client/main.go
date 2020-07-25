@@ -35,7 +35,11 @@ func title() {
 	return
 }
 
-func menu() {
+
+
+func main() {
+	
+	title()
 	var choice int
 	for ok := true; ok; ok = (choice != 3) {
 		n, err := fmt.Scanln(&choice)
@@ -54,11 +58,6 @@ func menu() {
 			os.Exit(2)
 		}
 	}
-	return
-}
-
-
-func main() {
 	
 	//1. Total license count
 	//2. Search for host
