@@ -5,6 +5,36 @@ import (
 	"goStuff/CrowdStrikeAPI/api"
 )
 
+func title() {
+
+       fmt.Println(" ██████╗  ██████╗       ███████╗ █████╗ ██╗      ██████╗ ██████╗ ███╗   ██╗")
+       fmt.Println("██╔════╝ ██╔═══██╗      ██╔════╝██╔══██╗██║     ██╔════╝██╔═══██╗████╗  ██║")
+       fmt.Println("██║  ███╗██║   ██║█████╗█████╗  ███████║██║     ██║     ██║   ██║██╔██╗ ██║")
+       fmt.Println("██║   ██║██║   ██║╚════╝██╔══╝  ██╔══██║██║     ██║     ██║   ██║██║╚██╗██║")
+       fmt.Println("╚██████╔╝╚██████╔╝      ██║     ██║  ██║███████╗╚██████╗╚██████╔╝██║ ╚████║")
+       fmt.Println("╚═════╝  ╚═════╝       ╚═╝     ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝ ")
+
+	
+	fmt.Println("         	  ____                      ")
+	fmt.Println("                 /   \\                     ")
+	fmt.Println("                 /    \\                    ")
+	fmt.Println("      ///////////^^^^^^\\\\\\\\\\\\         ")
+	fmt.Println("     ///////////        \\\\\\\\\\\\        ")
+	fmt.Println("    ////// \\\\\\      //////  \\\\\\       ")
+	fmt.Println("   /////       \\      //     \\\\\\      ")
+	fmt.Println("  ////          //    \\        \\\\     ")
+	fmt.Println(" ///           ///||\\\\          \\\\   ")
+	fmt.Println("//            | //||\\ |          \\\\   ")
+	fmt.Println("/               ^^^^^^             \\ ")
+
+	fmt.Println("")
+	fmt.Println("")
+	fmt.Println("")
+	fmt.Println("")
+	fmt.Println("Made with <3 by i_obj")
+	return
+}
+
 func menu() {
 	var choice int
 	for ok := true; ok; ok = (choice != 3) {
