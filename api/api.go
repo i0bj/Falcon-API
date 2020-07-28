@@ -24,11 +24,7 @@ type Token struct {
 }
 
 type InLicense struct {
-	Offset          int32    `json:"offset"`
-	Limit           int16    `json:"limit"`
 	Total           int16    `json:"total"`
-	Resources       []string `json:"resources"`
-	Resource_errors []string `json:"errors"`
 }
 
 type OutLicense struct {
