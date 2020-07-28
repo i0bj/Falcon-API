@@ -23,6 +23,26 @@ type Token struct {
 	ExpiresIn int    `json:"expires_in"`
 }
 
+type InLicense struct {
+	Offset          int32    `json:"offset"`
+	Limit           int16    `json:"limit"`
+	Total           int16    `json:"total"`
+	Resources       []string `json:"resources"`
+	Resource_errors []string `json:"errors"`
+}
+
+type OutLicense struct {
+	Pagination InLicense `json:"pagination"`
+}
+
+type MetaLicense struct {
+	Meta OutLicense `json:"meta"`
+}
+
+type HostDetails struct {
+	Resources []HostMeta `json:"resources"`
+}
+
 // HostSearch struct will hold the host ID which can be used for additional queries.
 type HostSearch struct {
 	Resources []string `json:"resources"`
@@ -108,6 +128,34 @@ func AccessToken() (*Token, error) {
 
 }
 
+//LicenseTotal will fetch the total number of licenses in use.
+func LicenseTotal(q string) (*MetaLicense, error) {
+	params := url.Values{}
+	params.Add("limit", fmt.Sprintf("%s", q)) //5000 should give the total number of hosts
+	req, err := http.NewRequest("GET", BaseURL+FindAID+params.Encode(), nil)
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Authorization", " Bearer <token>") // find out why it only works when token is hardcoded
+	//refresh token
+	if err != nil {
+		log.Println(err, "Cannot find total licenses used.")
+	}
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Println("Error: ", err)
+	}
+	defer resp.Body.Close()
+
+	// variable holding the struct to which the json response will be placed in.
+	var ret MetaLicense
+	if err := json.NewDecoder(resp.Body).Decode(&ret); err != nil {
+		return nil, err
+	}
+
+	return &ret, nil
+}
+
 func FindHost(q string) *HostSearch {
 	params := url.Values{}
 	params.Add("filter", fmt.Sprintf("platform_name: '%s'", q))
@@ -117,9 +165,7 @@ func FindHost(q string) *HostSearch {
 	req.Header.Set("Authorization", " Bearer <token>") 
 	//refresh token
 	if err != nil {
-		f, _ := os.Create(`C:\temp\CrowdstrikeLogs\log.txt`)
-		log.Println("Error: ", err)
-		log.SetOutput(f)
+		log.Println(err)
 	}
 	fmt.Println(req)
 	client := &http.Client{}
