@@ -50,21 +50,17 @@ func main() {
 		}
 		switch choice {
 		case 1:
-			fmt.Println("test1")
+			api.LicenseTotal("5000")
 		case 2:
 			fmt.Println(api.AccessToken())
 		case 3:
+			fmt.Println()
+		case 4:
 			fmt.Println("Exiting Falcon...")
 			os.Exit(2)
 		}
 	}
 	
-	//1. Total license count
-	//2. Search for host
-	//3. Contain host
-	//4. refresh token
 
-	//fmt.Println(api.AccessToken())
-	fmt.Println(api.FindHost("Mac"))
 
 }
