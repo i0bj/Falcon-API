@@ -24,15 +24,15 @@ type Token struct {
 }
 
 type InLicense struct {
-	Total           int16    `json:"total"`
+	Total int16 `json:"total,omitempty"`
 }
 
 type OutLicense struct {
-	Pagination InLicense `json:"pagination"`
+	Pagination InLicense `json:"pagination,omitempty"`
 }
 
 type MetaLicense struct {
-	Meta OutLicense `json:"meta"`
+	Meta OutLicense `json:"meta,omitempty"`
 }
 
 type HostDetails struct {
@@ -143,14 +143,14 @@ func LicenseTotal(q string) (*MetaLicense, error) {
 	}
 	defer resp.Body.Close()
 
-	// variable holding the struct to which the json response will be placed in.
-	var ret MetaLicense
-	if err := json.NewDecoder(resp.Body).Decode(&ret); err != nil {
-		return nil, err
+	val := &MetaLicense{} //variable that will contain response JSON and place it in MetaLicense struct
+
+	err = json.NewDecoder(resp.Body).Decode(&val)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	return &ret, nil
-}
+	log.Println("\n", val.Meta.Pagination.Total) // prints out number of licenses used without {}
 
 func FindHost(q string) *HostSearch {
 	params := url.Values{}
