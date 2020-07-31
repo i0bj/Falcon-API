@@ -125,7 +125,7 @@ func AccessToken() (*Token, error) {
 }
 
 //LicenseTotal will fetch the total number of licenses in use.
-func LicenseTotal(q string) (*MetaLicense, error) {
+func LicenseTotal(q string)  {
 	params := url.Values{}
 	params.Add("limit", fmt.Sprintf("%s", q)) //5000 should give the total number of hosts
 	req, err := http.NewRequest("GET", BaseURL+FindAID+params.Encode(), nil)
@@ -150,7 +150,17 @@ func LicenseTotal(q string) (*MetaLicense, error) {
 		log.Fatal(err)
 	}
 
-	log.Println("\n", val.Meta.Pagination.Total) // prints out number of licenses used without {}
+	if val.Meta.Pagination.Total >= 1300 {
+		fmt.Println("[!] You are over the allocated limit:", val.Meta.Pagination.Total)
+		var answer string
+		fmt.Println("Would you like to delete duplicate hosts? yes/no")
+		fmt.Scanln(&answer)
+		if answer == "yes" {
+			fmt.Println("fun to delete duplictes by last check in") //TODO function to remove duplicates
+		}
+	} else if val.Meta.Pagination.Total <= 1300 {
+		fmt.Printf("[+] Total: %d", val.Meta.Pagination.Total)
+	}
 
 func FindHost(q string) *HostSearch {
 	params := url.Values{}
