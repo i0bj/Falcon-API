@@ -163,6 +163,23 @@ func LicenseTotal(q string)  {
 	}
 
 func FindHost(q string) *HostSearch {
+	
+	fmt.Println("Select from the options below:")
+	var choice int
+	fmt.Println("1. Platform")
+	fmt.Println("2. Host")
+	fmt.Println("3. IP")
+	fmt.Scanln(&choice)
+	switch choice {
+	case 1:
+
+
+	case 2:
+
+
+	case 3:
+
+	}
 	params := url.Values{}
 	params.Add("filter", fmt.Sprintf("platform_name: '%s'", q))
 
