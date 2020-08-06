@@ -92,7 +92,7 @@ type HostMaker struct {
 }
 
 // AccessToken func generates to new token. This token expires every 30 min
-func AccessToken() (*Token, error) {
+func AccessToken() string {
 	/* Object that formats body with client/secret that will be sent
 	   to token endpoint*/
 	body := url.Values{}
@@ -114,15 +114,18 @@ func AccessToken() (*Token, error) {
 	}
 	defer resp.Body.Close()
 
-	// tok contains the body of the response, in this case the auth token and unmarshalled into the Token struct.
-	var tok Token
-	if err := json.NewDecoder(resp.Body).Decode(&tok); err != nil {
-		return nil, err
+	// Data contains the body of the response, in this case the auth token
+	tok := &Token{}
+	err = json.NewDecoder(resp.Body).Decode(&tok)
+	if err != nil {
+		log.Println(err)
 	}
 
-	return &tok, err
+	return tok.MainToken
 
 }
+
+
 
 //LicenseTotal will fetch the total number of licenses in use.
 func LicenseTotal(q string)  {
