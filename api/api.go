@@ -165,35 +165,41 @@ func LicenseTotal(q string)  {
 		fmt.Printf("[+] Total: %d", val.Meta.Pagination.Total)
 	}
 
-func FindHost(q string) *HostSearch {
-	
+//FindHost will fetch the HID/AID using the provided query.
+func FindHost() (*HostSearch, error) {
+	var i, p, h string
+
 	fmt.Println("Select from the options below:")
 	var choice int
 	fmt.Println("1. Platform")
-	fmt.Println("2. Host")
+	fmt.Println("2. Hostname")
 	fmt.Println("3. IP")
 	fmt.Scanln(&choice)
 	switch choice {
 	case 1:
 
-
+		fmt.Println("Enter Platform name: ex Windows")
+		fmt.Scanln(i)
 	case 2:
-
+		var h string
+		fmt.Println("Enter hostname: ")
+		fmt.Scanln(h)
 
 	case 3:
+		var i string
+		fmt.Println("Enter IP")
+		fmt.Scanln(i)
 
 	}
-	params := url.Values{}
-	params.Add("filter", fmt.Sprintf("platform_name: '%s'", q))
 
+	params := url.Values{}
+	params.Add("filter", fmt.Sprintf("hostname: '%s'", h))
+	params.Add("filter", fmt.Sprintf("platform_name: '%s'", p))
 	req, err := http.NewRequest("GET", BaseURL+FindAID+params.Encode(), nil)
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Authorization", " Bearer <token>") 
 	//refresh token
-	if err != nil {
-		log.Println(err)
-	}
-	fmt.Println(req)
+
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -201,16 +207,12 @@ func FindHost(q string) *HostSearch {
 	}
 	defer resp.Body.Close()
 
-	respBody, err := ioutil.ReadAll(resp.Body)
 	// variable holding the struct to which the json response will be placed in.
 	//var ret string
 	var ret HostSearch
-	if err := json.Unmarshal(respBody, &ret); err != nil {
-		fmt.Println(err)
+	if err := json.NewDecoder(resp.Body).Decode(&ret); err != nil {
+		return nil, err
 	}
 
-	//fmt.Printf("Host: %s, MAC: %s", ret.HostName, ret.Domain)
-	//return string(respBody)
-	return &ret
+	return &ret, nil
 }
-
