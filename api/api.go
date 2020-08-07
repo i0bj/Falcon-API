@@ -216,3 +216,42 @@ func FindHost() (*HostSearch, error) {
 
 	return &ret, nil
 }
+//FindInfo prints metadata on host.
+func FindInfo(aid []string) {
+	params := url.Values{}
+	params.Add("ids", aid[0])
+	req, err := http.NewRequest("GET", BaseURL+HostInfo+params.Encode(), nil)
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Authorization", " Bearer <token>")
+	if err != nil {
+		log.Println("Error: ", err)
+	}
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Println("Error: ", err)
+	}
+	defer resp.Body.Close()
+
+	ret := &HostDetails{} // ret variable holds the HostDetails structure for the json to unmarshal into.
+	err = json.NewDecoder(resp.Body).Decode(&ret)
+	if err != nil {
+		log.Println(err)
+	}
+
+	fmt.Printf("Hostname: %s\nMac: %s\nIP: %s\nDomain: %s\nOU:%s\nFirst Seen: %s\nLast Seen: %s\nOS Version: %s\nPlatform: %s\nBios Manufacturer: %s\nAgent Version: %s\nExternal IP: %s ",
+		ret.Resources[0].HostName,
+		ret.Resources[0].MAC,
+		ret.Resources[0].IntIP,
+		ret.Resources[0].Domain,
+		ret.Resources[0].OU,
+		ret.Resources[0].FirstSeen,
+		ret.Resources[0].LastSeen,
+		ret.Resources[0].OSVersion,
+		ret.Resources[0].Platform,
+		ret.Resources[0].BiosDEV,
+		ret.Resources[0].AgentVER,
+		ret.Resources[0].ExtIP,
+	)
+}
