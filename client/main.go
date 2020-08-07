@@ -38,8 +38,16 @@ func title() {
 
 
 func main() {
-	
+
 	title()
+
+	fmt.Println("1. Total Licenses Used")
+	fmt.Println("2. Get host metadata")
+	fmt.Println("3. Access Token")
+	fmt.Println("4. Find a Host")
+	fmt.Println("5. Exit")
+	// choice variable will hold the selection you make
+	// and will be used in the switch statement below
 	var choice int
 	for ok := true; ok; ok = (choice != 3) {
 		n, err := fmt.Scanln(&choice)
@@ -52,15 +60,13 @@ func main() {
 		case 1:
 			api.LicenseTotal("5000")
 		case 2:
-			fmt.Println(api.AccessToken())
+			api.FindInfo(api.FindHost("<host>")) 
 		case 3:
-			fmt.Println()
+			fmt.Println(api.AccessToken())
 		case 4:
+			fmt.Println(api.FindHost("<search term>"))
+		case 5:
 			fmt.Println("Exiting Falcon...")
 			os.Exit(2)
 		}
 	}
-	
-
-
-}
