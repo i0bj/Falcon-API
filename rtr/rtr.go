@@ -40,6 +40,22 @@ type BatchCmd struct {
 	PersistAll    string   `json:"persist_all"`
 }
 
+// ProgressBar funtion for total license count and script run. Can add it whereever
+func ProgressBar(iteration, total int, prefix string, length int, fill string) {
+	percent := float64(iteration) / float64(total)
+	filledLength := int(length * iteration / total)
+	end := ">"
+
+	if iteration == total {
+		end = "="
+	}
+	bar := strings.Repeat(fill, filledLength) + end + strings.Repeat("-", (length-filledLength))
+	fmt.Printf("\r%s [%s] %f ", prefix, bar, percent)
+	if iteration == total {
+		fmt.Println()
+	}
+}
+
 func StartSession() {
 	URLValue := url.Values{}
 
