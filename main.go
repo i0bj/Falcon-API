@@ -37,7 +37,6 @@ func title() {
 	fmt.Println("")
 	fmt.Println("")
 	fmt.Println("Made with <3 by i_obj")
-	return
 }
 
 func programExit() {
