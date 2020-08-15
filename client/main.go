@@ -52,12 +52,15 @@ func main() {
 	for ok := true; ok; ok = (choice != 3) {
 		n, err := fmt.Scanln(&choice)
 		if n > 1 || err != nil {
-			fmt.Println("[!] Invalid input")
-			fmt.Println("[!] Entry not found, try again.")
+			
 			continue
 		}
 		switch choice {
 		case 1:
+			for i := 0; i < 30; i++ {
+				time.Sleep(50 * time.Millisecond) 
+				rtr.ProgressBar(i+1, 30, "Calculating", 10, "=")
+			}
 			api.LicenseTotal("5000")
 		case 2:
 			api.FindInfo(api.FindHost("<host>")) 
