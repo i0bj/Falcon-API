@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-// Defined variables for communication between api endpoints
+// Constants containing API CS API endpoints
 const (
 	BaseURL   = ""  // Base API URL
 	FindAID   = ""  // Get agent ID
