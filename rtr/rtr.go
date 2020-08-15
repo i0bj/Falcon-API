@@ -1,4 +1,4 @@
-package RTR
+package rtr
 
 import (
 	"bytes"
