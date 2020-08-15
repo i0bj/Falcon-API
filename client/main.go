@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"goStuff/CrowdStrikeAPI/api"
+	"goStuff/CrowdStrikeAPI/rtr"
 )
 
 func title() {
@@ -35,10 +36,21 @@ func title() {
 	return
 }
 
+func programExit() {
+	c := make(chan os.Signal)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-c
+		fmt.Println("\r[!] Ctrl+C pressed. Program exiting..")
+		os.Exit(0)
+	}()
+}
+
+
 
 
 func main() {
-
+        programExit()
 	title()
 
 	fmt.Println("1. Total Licenses Used")
