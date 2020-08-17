@@ -100,7 +100,11 @@ func StartSession() {
 	}
 	defer resp.Body.Close()
 
-	fmt.Println(resp.StatusCode, resp.Header)
+	if resp.StatusCode == 201 {
+	    fmt.Println("[+] Batch session created successfully.")
+	} else {
+	    log.Println("[!] There was an error when attempting to create batch session.")
+	}
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println(string(body))
 }
