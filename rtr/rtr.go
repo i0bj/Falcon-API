@@ -57,6 +57,22 @@ func ProgressBar(iteration, total int, prefix string, length int, fill string) {
 }
 
 func StartSession() {
+	var HIDS []string
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Enter Host IDs: ")
+	for scanner.Scan() {
+
+		HIDS = append(HIDS, scanner.Text())
+		if scanner.Text() == "eof" { //TODO clean up EOF to break out of loop
+			break
+		}
+
+	}
+	
+	URLValue := url.Values{}
+
+	URLValue.Set("timeout", "30")
+	URLValue.Set("timeout_duration", "60s"
 	URLValue := url.Values{}
 
 	URLValue.Set("timeout", "30")
@@ -64,7 +80,7 @@ func StartSession() {
 
 	group := BatchSess{
 		//Existing_Batch: "",
-		HostIDs: []string{"", ""},
+		HostIDs: HIDS,
 		//QueueOffline:   true,
 	}
 	jsonData, err := json.Marshal(group)
