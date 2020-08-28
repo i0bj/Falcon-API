@@ -78,7 +78,7 @@ func ProgressBar(iteration, total int, prefix string, length int, fill string) {
 		fmt.Println()
 	}
 }
-
+// Starts batch session for group of provided hosts
 func StartSession() string {
 	var HIDS []string
 	scanner := bufio.NewScanner(os.Stdin)
@@ -129,7 +129,7 @@ func StartSession() string {
 	fmt.Printf("Batch ID: %s will be active for 10 minutes.", btchResp.BatchID)
 }
 
-
+// Runs commands on multiple hosts using the provided batch ID.
 func ScriptRun() {
 
 	payload := &BatchCmd{
