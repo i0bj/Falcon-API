@@ -26,6 +26,29 @@ var (
 	response = ""
 )
 
+
+type OutMostBatch struct {
+	BatchID   string     `json:"batch_id"`
+	Resources OuterBatch `json:"resources"`
+}
+
+type OuterBatch struct {
+	AdditionalProp InnerBatch `json:"AdditionalProp1"`
+}
+
+type InnerBatch struct {
+	SessionID      string   `json:"session_id"`
+	Task_id        string   `json:"task_id"`
+	Complete       bool     `json:"complete"`
+	Stdout         string   `json:"stdout"`
+	Stderr         string   `json:"stderr"`
+	Base_command   string   `json:"base_command"`
+	Aid            string   `json:"aid"`
+	Errors         []string `json:"errors"`
+	Query_time     string   `json:"query_time"`
+	Offline_queued string   `json:"offline_queued"`
+}
+
 type BatchSess struct {
 	Existing_Batch string   `json:"existing_batch_id"`
 	HostIDs        []string `json:"host_ids"`
@@ -56,32 +79,25 @@ func ProgressBar(iteration, total int, prefix string, length int, fill string) {
 	}
 }
 
-func StartSession() {
+func StartSession() string {
 	var HIDS []string
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("Enter Host IDs: ")
 	for scanner.Scan() {
-
 		HIDS = append(HIDS, scanner.Text())
 		if scanner.Text() == "eof" { //TODO clean up EOF to break out of loop
 			break
 		}
-
 	}
 	
 	URLValue := url.Values{}
-
 	URLValue.Set("timeout", "30")
 	URLValue.Set("timeout_duration", "60s"
-	URLValue := url.Values{}
-
-	URLValue.Set("timeout", "30")
-	URLValue.Set("timeout_duration", "60s")
-
+	
 	group := BatchSess{
 		//Existing_Batch: "",
 		HostIDs: HIDS,
-		//QueueOffline:   true,
+		QueueOffline: true,
 	}
 	jsonData, err := json.Marshal(group)
 
@@ -101,13 +117,18 @@ func StartSession() {
 	defer resp.Body.Close()
 
 	if resp.StatusCode == 201 {
-	    fmt.Println("[+] Batch session created successfully.")
+		fmt.Println("[+] Batch session created successfully.")
 	} else {
-	    log.Println("[!] There was an error when attempting to create batch session.")
+		log.Println("[!] There was an error when attempting to create batch session.")
 	}
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println(string(body))
+	btchResp := &OutMostBatch{}
+	err = json.NewDecoder(resp.Body).Decode(&btchResp)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Batch ID: %s will be active for 10 minutes.", btchResp.BatchID)
 }
+
 
 func ScriptRun() {
 
