@@ -74,11 +74,20 @@ func main() {
 		}
 		switch choice {
 			case 1:
-			for i := 0; i < 30; i++ {
-				time.Sleep(50 * time.Millisecond) 
+				for i := 0; i < 30; i++ {
+				time.Sleep(50 * time.Millisecond)
 				rtr.ProgressBar(i+1, 30, "Calculating", 10, "=")
 			}
 
+			api.LicenseTotal("5000")
+			var ret string
+			fmt.Println("\n\nReturn to main menu? y/n")
+			fmt.Scan(&ret)
+			if ret == "y" {
+				menu()
+			} else if ret == "n" {
+
+			}
 			api.LicenseTotal("5000")
 		case 2:
 			api.FindInfo(api.FindHost(""))
