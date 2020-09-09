@@ -162,4 +162,14 @@ func ScriptRun() {
 	if err != nil {
 		log.Println(err)
 	}
+	defer resp.Body.Close()
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println(string(body))
+
+	if resp.StatusCode == 201 {
+		fmt.Println("[+] cmd successfully sent.")
+	} else {
+		fmt.Println("[!] There was an error running the cmd")
+	}
 }
