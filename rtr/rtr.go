@@ -1,13 +1,17 @@
 package rtr
 
 import (
+        "bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"goStuff/CrowdStrikeAPI/api"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
+	"os"
+	"strings"
 )
 
 var (
