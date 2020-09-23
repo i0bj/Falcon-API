@@ -45,7 +45,7 @@ func menu() {
 	fmt.Println("3. Access Token")
 	fmt.Println("4. Find a Host")
 	fmt.Println("5. Start Batch Session")
-	fmt.Println("6. Run CMD")
+	fmt.Println("6. Run batch CMD")
 	fmt.Println("7. Exit")
 	// choice variable will hold the selection you make
 	// and will be used in the switch statement below
@@ -83,7 +83,10 @@ func menu() {
 		case 5:
 			rtr.StartSession()
 		case 6:
-			rtr.ScriptRun("") //batch session ID
+			var batchID string
+			fmt.Println("Please enter the Batch ID: ")
+			fmt.Scanln(&batchID)
+			rtr.ScriptRun(batchID) //batch session ID
 		case 7:
 			fmt.Println("Exiting Falcon...")
 			os.Exit(0)
