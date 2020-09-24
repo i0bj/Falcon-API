@@ -76,8 +76,16 @@ func menu() {
 		case 2:
 			api.FindInfo(api.FindHost(""))
 		case 3:
-			fmt.Println("An Oauth2 token has been created.", )
-			
+			var token string
+			fmt.Println("Do you a new access token? Enter yes or no")
+			fmt.Scanln(&token)
+			if token == "yes" {
+				api.AccessToken()
+				fmt.Println("An Oauth2 token has been created and saved.")
+			} else {
+				fmt.Println("Exiting Falcon...")
+				os.Exit(0)
+			}
 		case 4:
 			fmt.Println(api.FindHost("))
 		case 5:
