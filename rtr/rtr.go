@@ -140,7 +140,7 @@ func ScriptRun() {
 	fmt.Println("Enter the Base command to run: ex run, put, runscript..")
 	fmt.Scanln(&baseCMD)
 
-	fmt.Println("Enter the full command to run: ex run c:\\someDirectory\\msiexec.exe -CommandLine=/i c:\\test.msi")
+	fmt.Println("Enter the commad string ex:  'c:\\temp\\someDirectory\\msiexec.exe' -CommandLine='/i c:\\test.msi'")
 	fmt.Scanln(&cmdstr)
 	URLValue := url.Values{}
 
@@ -150,7 +150,7 @@ func ScriptRun() {
 	payload := BatchCMD{
 		BaseCommand:   baseCMD, 
 		BatchID:       q,
-		CommandString: cmdstr,
+		CommandString: baseCMD + " " + cmdstr,
 		PersistAll:    true,
 	}
 
