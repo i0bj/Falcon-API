@@ -107,7 +107,9 @@ func AccessToken() string {
 	if err != nil {
 		log.Println("Attn: ", err)
 	}
-	client := &http.Client{}
+	client := &http.Client{
+	    Timeout: 5 * time.Minute,
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Println("Error: ", err)
@@ -139,7 +141,9 @@ func LicenseTotal(q string)  {
 		log.Println(err, "Cannot find total licenses used.")
 	}
 
-	client := &http.Client{}
+	client := &http.Client{
+	    Timeout: 5 * time.Minute,
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Println("Error: ", err)
@@ -200,7 +204,9 @@ func FindHost() (*HostSearch, error) {
 	req.Header.Set("Authorization", " Bearer <token>") 
 	//refresh token
 
-	client := &http.Client{}
+	client := &http.Client{
+	    Timeout: 5 * time.Minute,
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Println("Error: ", err)
@@ -227,7 +233,9 @@ func FindInfo(aid []string) {
 		log.Println("Error: ", err)
 	}
 
-	client := &http.Client{}
+	client := &http.Client{
+	    Timeout: 5 * time.Minute,
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Println("Error: ", err)
