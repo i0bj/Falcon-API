@@ -77,7 +77,7 @@ func menu() {
 			api.FindInfo(api.FindHost(""))
 		case 3:
 			var token string
-			fmt.Println("Do you a new access token? Enter yes or no")
+			fmt.Println("Do you nned a new access token? Enter yes or no")
 			fmt.Scanln(&token)
 			if token == "yes" {
 				api.AccessToken()
