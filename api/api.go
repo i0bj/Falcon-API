@@ -10,7 +10,8 @@ import (
 	"strings"
 )
 
-// Constants containing API CS API endpoints
+// Constants containing CS API endpoints.
+// Please add the endpoints listed in the CS portal
 const (
 	BaseURL   = ""  // Base API URL
 	FindAID   = ""  // Get agent ID
@@ -93,14 +94,13 @@ type HostMaker struct {
 
 // AccessToken func generates to new token. This token expires every 30 min
 func AccessToken() string {
-	/* Object that formats body with client/secret that will be sent
-	   to token endpoint*/
+	
+	// Object that formats body with client/secret that will be sen to token endpoint
 	body := url.Values{}
 	body.Set("client_id", os.Getenv("CS_CLIENT_ID"))  // Client ID
 	body.Set("client_secret", os.Getenv("CS_SECRET")) // Secret
 
-	/*First request for the required access token. This token is only
-	  active for 30 minutes.*/
+	//First request for the required access token. This token is only active for 30 minutes.
 	req, err := http.NewRequest("POST", BaseURL+AuthToken, strings.NewReader(body.Encode()))
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Set("Accept", "application/json")
@@ -135,7 +135,7 @@ func LicenseTotal(q string)  {
 	params.Add("limit", fmt.Sprintf("%s", q)) //5000 should give the total number of hosts
 	req, err := http.NewRequest("GET", BaseURL+FindAID+params.Encode(), nil)
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Authorization", " Bearer <token>") // find out why it only works when token is hardcoded
+	req.Header.Set("Authorization", " Bearer <token>") 
 	//refresh token
 	if err != nil {
 		log.Println(err, "Cannot find total licenses used.")
@@ -149,8 +149,8 @@ func LicenseTotal(q string)  {
 		log.Println("Error: ", err)
 	}
 	defer resp.Body.Close()
-
-	val := &MetaLicense{} //variable that will contain response JSON and place it in MetaLicense struct
+        //variable that will contain response JSON and place it in MetaLicense struct
+	val := &MetaLicense{} 
 
 	err = json.NewDecoder(resp.Body).Decode(&val)
 	if err != nil {
@@ -241,8 +241,8 @@ func FindInfo(aid []string) {
 		log.Println("Error: ", err)
 	}
 	defer resp.Body.Close()
-
-	ret := &HostDetails{} // ret variable holds the HostDetails structure for the json to unmarshal into.
+        // ret variable holds the HostDetails structure for the json to unmarshal into.
+	ret := &HostDetails{} 
 	err = json.NewDecoder(resp.Body).Decode(&ret)
 	if err != nil {
 		log.Println(err)
