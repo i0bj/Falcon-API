@@ -49,7 +49,7 @@ func menu() {
 	// choice variable will hold the selection you make
 	// and will be used in the switch statement below
 	var choice int
-	for ok := true; ok; ok = (choice != 7) {
+	for ok := true; ok; ok = (choice != 6) {
 		n, err := fmt.Scanln(&choice)
 		if n > 1 || err != nil {
 
@@ -71,12 +71,9 @@ func menu() {
 			} else if ret == "n" {
 
 			}
-
 		case 2:
-			api.FindInfo(api.FindHost(""))
-		case 3:
 			var token string
-			fmt.Println("Do you nned a new access token? Enter yes or no")
+			fmt.Println("Do you need a new access token? Enter yes or no")
 			fmt.Scanln(&token)
 			if token == "yes" {
 				api.AccessToken()
@@ -85,16 +82,21 @@ func menu() {
 				fmt.Println("Exiting Falcon...")
 				os.Exit(0)
 			}
+		case 3:
+			var HIDS string
+			fmt.Println("Enter Host: ")
+			fmt.Scanln(&HIDS)
+			api.FindInfo(api.FindHost(HIDS))
+
 		case 4:
-			fmt.Println(api.FindHost("))
-		case 5:
 			rtr.StartSession()
-		case 6:
+		case 5:
+			//batch session ID
 			var batchID string
 			fmt.Println("Please enter the Batch ID: ")
 			fmt.Scanln(&batchID)
-			rtr.ScriptRun(batchID) //batch session ID
-		case 7:
+			rtr.ScriptRun(batchID)
+		case 6:
 			fmt.Println("Exiting Falcon...")
 			os.Exit(0)
 		}
@@ -102,22 +104,10 @@ func menu() {
 
 }
 
-func programExit() {
-	c := make(chan os.Signal)
-	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
-	go func() {
-		<-c
-		fmt.Println("\r[!] Ctrl+C pressed. Program exiting..")
-		os.Exit(0)
-	}()
-}
-
-
-
-
 func main() {
-        programExit()
+
 	title()
+	programExit()
 	menu()
 
-	}
+}
