@@ -205,26 +205,27 @@ func FindHost(HIDS string) []string {
 
 }
 	
-//FindInfo prints metadata on host.
+// FindInfo will return host metadata
 func FindInfo(aid []string) {
 	params := url.Values{}
 	params.Add("ids", aid[0])
 	req, err := http.NewRequest("GET", BaseURL+HostInfo+params.Encode(), nil)
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Authorization", " Bearer <token>")
+	req.Header.Set("Authorization", " Bearer "+OauthToken)
 	if err != nil {
 		log.Println("Error: ", err)
 	}
 
 	client := &http.Client{
-	    Timeout: 5 * time.Minute,
+		Timeout: 3 * time.Minute,
 	}
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Println("Error: ", err)
 	}
 	defer resp.Body.Close()
-        // ret variable holds the HostDetails structure for the json to unmarshal into.
+        
+	// ret variable holds the HostDetails structure for the json to unmarshal into.
 	ret := &HostDetails{} 
 	err = json.NewDecoder(resp.Body).Decode(&ret)
 	if err != nil {
@@ -246,3 +247,4 @@ func FindInfo(aid []string) {
 		ret.Resources[0].ExtIP,
 	)
 }
+
