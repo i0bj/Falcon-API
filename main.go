@@ -41,12 +41,11 @@ func title() {
 
 func menu() {
 	fmt.Println("1. Total Licenses Used")
-	fmt.Println("2. Get host metadata")
-	fmt.Println("3. Access Token")
-	fmt.Println("4. Find a Host")
-	fmt.Println("5. Start Batch Session")
-	fmt.Println("6. Run batch CMD")
-	fmt.Println("7. Exit")
+	fmt.Println("2. Access Token")
+	fmt.Println("3. Get host metadata")
+	fmt.Println("4. Start Batch Session")
+	fmt.Println("5. Run batch CMD")
+	fmt.Println("6. Exit")
 	// choice variable will hold the selection you make
 	// and will be used in the switch statement below
 	var choice int
