@@ -39,6 +39,12 @@ func title() {
 	fmt.Println("Made with <3 by i_obj")
 }
 
+type login struct {
+	username string
+	password string
+}
+
+
 func menu() {
 	fmt.Println("1. Total Licenses Used")
 	fmt.Println("2. Access Token")
