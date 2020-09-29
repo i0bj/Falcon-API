@@ -138,7 +138,7 @@ func menu() {
 }
 
 func main() {
-
+        ulogin := &login{username: "test", password: "test"}
 	title()
 	programExit()
 	menu()
