@@ -136,11 +136,51 @@ func menu() {
 	}
 
 }
-
 func main() {
-        ulogin := &login{username: "test", password: "test"}
-	title()
-	programExit()
-	menu()
+	
+	//change username and passwords for users
+	ulogin1 := &login{username: "user", password: "test"}
+	ulogin2 := &login{username: "user", password: "test2"}
+	ulogin3 := &login{username: "user", password: "test3"}
+	ulogin4 := &login{username: "user", password: "test4"}
+	fmt.Println("------------------------------------------------------------------------------------------|")
+	fmt.Println("You must have explicit, authorized permission to access this application. \nUnauthorized attempts to access or use this app may result in criminal penalties.")
+	fmt.Println("------------------------------------------------------------------------------------------|")
 
+	var usr, pswd string
+	fmt.Println("Enter Username: ")
+	fmt.Scanln(&usr)
+	fmt.Println("Enter Password: ")
+	fmt.Scanln(&pswd)
+// Handle nested if statements
+	if ulogin1.username != usr || ulogin1.password != pswd {
+		if ulogin2.username != usr || ulogin2.password != pswd {
+			if ulogin3.username != usr || ulogin3.password != pswd {
+				if ulogin4.username != usr || ulogin4.password != pswd {
+					log.Println("Unauthorized attempt")
+					os.Exit(1)
+
+				} else {
+					title()
+					programExit()
+					menu()
+
+				}
+			} else {
+				title()
+				programExit()
+				menu()
+			}
+		} else {
+
+			title()
+			programExit()
+			menu()
+
+		}
+	} else {
+		title()
+		programExit()
+		menu()
+	}
 }
