@@ -44,33 +44,6 @@ type login struct {
 	password string
 }
 
-func (l *login) LoginUser() {
-	fmt.Println("------------------------------------------------------------------------------------------|")
-	fmt.Println("You must have explicit, authorized permission to access this application. \nUnauthorized attempts to access or use this app may result in criminal penalties.")
-	fmt.Println("------------------------------------------------------------------------------------------|")
-
-	var usr, pswd string
-	fmt.Println("Enter Username: ")
-	fmt.Scanln(&usr)
-	fmt.Println("Enter Password: ")
-	fmt.Scanln(&pswd)
-
-        // Change generic user* to username of individuals that will use the application
-       	user1 := login{username: usr, password: pswd}
-	user2 := login{username: usr, password: pswd}
-	
-	if user1.username != l.username || user1.password != l.password {
-		log.Println("[!] Unauthorized Attempt")
-		os.Exit(1)
-	}
-
-	if user2.username != l.username || user2.password != l.password {
-		log.Println("[!] Unauthorized Attempt")
-		return
-	}
-
-}
-
 
 func menu() {
 	fmt.Println("1. Total Licenses Used")
