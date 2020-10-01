@@ -93,6 +93,18 @@ func menu() {
 			fmt.Println("Enter Host: ")
 			fmt.Scanln(&HIDS)
 			api.FindInfo(api.FindHost(HIDS))
+			var ret string
+			fmt.Println("\n\n[!] Perform another lookup? yes or no?")
+			fmt.Scan(&ret)
+			if ret == "yes" {
+				var HIDS string
+				fmt.Println("Enter Host: ")
+				fmt.Scanln(&HIDS)
+				api.FindInfo(api.FindHost(HIDS)) //TODO clean up, have the function return to menu possibly as opposed to asking for another hostname.
+			} else if ret == "no" {
+				menu()
+
+			}
 
 		case 4:
 			rtr.StartSession()
