@@ -125,11 +125,11 @@ func menu() {
 }
 func main() {
 	
-	//change username and passwords for users
-	ulogin1 := &login{username: "user", password: "test"}
-	ulogin2 := &login{username: "user", password: "test2"}
-	ulogin3 := &login{username: "user", password: "test3"}
-	ulogin4 := &login{username: "user", password: "test4"}
+	// Change username and add bcrypt hashed passwords to login struct
+	ulogin1 := &login{username: "user", password: "$2y$10$Rfz1xP4NzZukBYGuhZ10meItmPAquov2xbKtsIwXbZLgqtUO/YcRm"} 
+	ulogin2 := &login{username: "user", password: "$2y$10$Rfz1xP4NzZukBYGuhZ10meItmPAquov2xbKtsIwXbZLgqtUO/YcRm"}
+	ulogin3 := &login{username: "user", password: "$2y$10$Rfz1xP4NzZukBYGuhZ10meItmPAquov2xbKtsIwXbZLgqtUO/YcRm"}
+	ulogin4 := &login{username: "user", password: "$2y$10$Rfz1xP4NzZukBYGuhZ10meItmPAquov2xbKtsIwXbZLgqtUO/YcRm"}
 	fmt.Println("------------------------------------------------------------------------------------------|")
 	fmt.Println("You must have explicit, authorized permission to access this application. \nUnauthorized attempts to access or use this app may result in criminal penalties.")
 	fmt.Println("------------------------------------------------------------------------------------------|")
