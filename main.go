@@ -139,12 +139,14 @@ func main() {
 	fmt.Scanln(&usr)
 	fmt.Println("Enter Password: ")
 	fmt.Scanln(&pswd)
-// Handle nested if statements
-	if ulogin1.username != usr || ulogin1.password != pswd {
-		if ulogin2.username != usr || ulogin2.password != pswd {
-			if ulogin3.username != usr || ulogin3.password != pswd {
-				if ulogin4.username != usr || ulogin4.password != pswd {
-					log.Println("Unauthorized attempt")
+	
+        // When using Bcrypt you cannot compare hash values because bcrypt generates a 128 bit salt that is part of the generated hash.
+	// You will need to compare the bcrypt hash with the input from the user.
+	if ulogin1.username != usr || bcrypt.CompareHashAndPassword([]byte(ulogin1.password), []byte(pswd)) != nil {
+		if ulogin2.username != usr || bcrypt.CompareHashAndPassword([]byte(ulogin2.password), []byte(pswd)) != nil {
+			if ulogin3.username != usr || bcrypt.CompareHashAndPassword([]byte(ulogin3.password), []byte(pswd)) != nil {
+				if ulogin4.username != usr || bcrypt.CompareHashAndPassword([]byte(ulogin4.password), []byte(pswd)) != nil {
+					log.Println("[!] Unauthorized.")
 					os.Exit(1)
 
 				} else {
