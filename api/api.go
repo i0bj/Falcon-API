@@ -160,14 +160,12 @@ func LicenseTotal(q string)  {
 
 	if val.Meta.Pagination.Total >= 1300 {
 		fmt.Println("[!] You are over the allocated limit:", val.Meta.Pagination.Total)
-		var answer string
-		fmt.Println("Would you like to delete duplicate hosts? yes/no")
-		fmt.Scanln(&answer)
-		if answer == "yes" {
-			fmt.Println("fun to delete duplictes by last check in") //TODO function to remove duplicates
-		}
+		fmt.Println("\nPlease use the console to remove unneeded hosts.")
+
 	} else if val.Meta.Pagination.Total <= 1300 {
+		fmt.Println("You have not reached the limit of 1300")
 		fmt.Printf("[+] Total: %d", val.Meta.Pagination.Total)
+
 	}
 
 //FindHost will fetch the HID/AID using the provided query.
