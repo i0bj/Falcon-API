@@ -247,3 +247,22 @@ func FindInfo(aid []string) {
 	)
 }
 
+func DeleteHosts() {
+    var HIDS []string
+    scanner := bufio.NewScanner(os.Stdin)
+    fmt.Println("Enter the Host IDs you want to delete: ")
+	for scanner.Scan() {
+		HIDS := append(HIDS, scanner.Text())
+		if scanner.Text() == "eof" {
+			break
+		}
+	}
+	URLValue := url.Values{}
+
+	URLValue.Set("timeout", "30")
+	URLValue.Set("timeout_duration", "60s")
+
+	payload := OldHosts{
+		Ids: HIDS
+	}
+
