@@ -14,10 +14,11 @@ import (
 // Constants containing CS API endpoints.
 // Please add the endpoints listed in the CS portal
 const (
-	BaseURL   = ""  // Base API URL
-	FindAID   = ""  // Get agent ID
-	HostInfo  = "" // Get host info
-	AuthToken = ""// Request or Revoke Token
+	BaseURL   = ""    // Base API URL
+	FindAID   = ""   // Get agent ID
+	HostInfo  = ""  // Get host info
+	AuthToken = "" // Request or Revoke Token
+	DelHosts  = ""// API endpoint to delete host(s)
 )
 
 type Token struct {
