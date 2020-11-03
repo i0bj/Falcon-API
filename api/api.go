@@ -1,14 +1,17 @@
 package api
 
+
 import (
+	"bufio"
+	"bytes"
+	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
 	"os"
-	"time"
 	"strings"
+	"time"
 )
 
 // Constants containing CS API endpoints.
@@ -92,6 +95,10 @@ type HostMaker struct {
 	SystemManf        string `json:"system_manufacturer"`
 	SystemProduct     string `json:"system_product_name"`
 	ModifiedTimeStamp string `json:"modified_timestamp"`
+}
+
+type OldHosts struct {
+	Ids []string `json:"ids"`
 }
 
 // AccessToken func generates to new token. This token expires every 30 min
@@ -265,4 +272,23 @@ func DeleteHosts() {
 	payload := OldHosts{
 		Ids: HIDS
 	}
+	jsonData, err := json.Marshal(payload)
+	if err != nil {
+		fmt.Println(err)
+	}
+	req, err := http.NewRequest("POST", BaseURL+DelHosts, bytes.NewBuffer(jsonData))
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Authorization", "Bearer "+OauthToken)
+	req.Header.Set("Content-Type", "application/json")
+	if err != nil {
+		log.Println(err)
+	}
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Println(err)
+	}
+
+}
 
