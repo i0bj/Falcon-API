@@ -71,15 +71,6 @@ func menu() {
 			}
 
 			api.LicenseTotal("5000")
-			var ret string
-			fmt.Println("\n\nReturn to main menu? y/n")
-			fmt.Scan(&ret)
-		        if ret == "y" {
-			  menu()
-			} else if ret == "n" {
-				fmt.Println("[!] Exiting...")
-				os.Exit(0)
-			}
 		case 2:
 			var token string
 			fmt.Println("Do you need a new access token? Enter yes or no")
