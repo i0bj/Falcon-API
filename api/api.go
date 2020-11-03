@@ -255,28 +255,28 @@ func FindInfo(aid []string) {
 }
 
 func DeleteHosts() {
-    var HIDS []string
-    scanner := bufio.NewScanner(os.Stdin)
-    fmt.Println("Enter the Host IDs you want to delete: ")
+	var HIDS []string
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Enter the Host IDs you want to delete: ")
 	for scanner.Scan() {
-		HIDS := append(HIDS, scanner.Text())
-		if scanner.Text() == "eof" {
+		HIDS = append(HIDS, scanner.Text())
+		//Ctrl+z then enter will break out of loop
+		if scanner.Text() == "" {
 			break
 		}
 	}
 	URLValue := url.Values{}
-
-	URLValue.Set("timeout", "30")
-	URLValue.Set("timeout_duration", "60s")
+	URLValue.Set("action_name", "hide_host") //TODO change this to a var from user input, this will allow
+	//containment and unhiding
 
 	payload := OldHosts{
-		Ids: HIDS
+		Ids: HIDS,
 	}
 	jsonData, err := json.Marshal(payload)
 	if err != nil {
 		fmt.Println(err)
 	}
-	req, err := http.NewRequest("POST", BaseURL+DelHosts, bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest("POST", BaseURL+DelHosts+URLValue.Encode(), bytes.NewBuffer(jsonData))
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Authorization", "Bearer "+OauthToken)
 	req.Header.Set("Content-Type", "application/json")
@@ -289,6 +289,14 @@ func DeleteHosts() {
 	if err != nil {
 		log.Println(err)
 	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode == 202 {
+		fmt.Println("[+] Hosts have been removed")
+	} else {
+		fmt.Println("[!] Hosts failed to delete, please check console.")
+	}
+
 
 }
 
