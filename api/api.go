@@ -261,9 +261,6 @@ func DeleteHosts() {
 	for scanner.Scan() {
 		HIDS = append(HIDS, scanner.Text())
 		//Ctrl+z then enter will break out of loop
-		if scanner.Text() == "" {
-			break
-		}
 	}
 	URLValue := url.Values{}
 	URLValue.Set("action_name", "hide_host") //TODO change this to a var from user input, this will allow
@@ -283,6 +280,7 @@ func DeleteHosts() {
 	if err != nil {
 		log.Println(err)
 	}
+	
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -290,13 +288,13 @@ func DeleteHosts() {
 		log.Println(err)
 	}
 	defer resp.Body.Close()
-
+	
 	if resp.StatusCode == 202 {
 		fmt.Println("[+] Hosts have been removed")
 	} else {
 		fmt.Println("[!] Hosts failed to delete, please check console.")
 	}
-
+	return
 
 }
 
