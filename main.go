@@ -53,7 +53,8 @@ func menu() {
 	fmt.Println("3. Get host metadata")
 	fmt.Println("4. Start Batch Session")
 	fmt.Println("5. Run batch CMD")
-	fmt.Println("6. Exit")
+	fmt.Println("6. Bulk Delete Hosts")
+	fmt.Println("7. Exit")
 	// choice variable will hold the selection you make
 	// and will be used in the switch statement below
 	var choice int
