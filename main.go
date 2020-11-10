@@ -108,7 +108,19 @@ func menu() {
 			fmt.Println("Please enter the Batch ID: ")
 			fmt.Scanln(&batchID)
 			rtr.ScriptRun(batchID)
+		
 		case 6:
+			fmt.Println("[!] After Entering Hosts Press CTRL + Z, Then Enter.")
+			api.DeleteHosts()
+			var answer string
+			fmt.Println("Delete Additional Hosts?")
+			fmt.Scan(&answer)
+			if answer == "yes" {
+				api.DeleteHosts()
+			} else {
+				os.Exit(1)
+			}
+		case 7:
 			fmt.Println("Exiting Falcon...")
 			os.Exit(0)
 		}
