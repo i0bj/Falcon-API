@@ -50,9 +50,9 @@ type login struct {
 func menu() {
 	fmt.Println("1. Total Licenses Used")
 	fmt.Println("2. Access Token")
-	fmt.Println("3. Get host metadata")
+	fmt.Println("3. Get Host Metadata")
 	fmt.Println("4. Start Batch Session")
-	fmt.Println("5. Run batch CMD")
+	fmt.Println("5. Run Batch CMD")
 	fmt.Println("6. Bulk Delete Hosts")
 	fmt.Println("7. Exit")
 	// choice variable will hold the selection you make
