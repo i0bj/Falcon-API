@@ -167,8 +167,8 @@ func LicenseTotal(q string)  {
 	}
 
 	if val.Meta.Pagination.Total >= 1300 {
-		fmt.Println("[!] You are over the allocated limit:", val.Meta.Pagination.Total)
-		fmt.Println("\nPlease use the console to remove unneeded hosts.")
+		fmt.Println("\n[!] You are over the allocated limit:", val.Meta.Pagination.Total)
+		fmt.Println("\nPlease delete hosts to stay below the allocated license count. ")
 
 	} else if val.Meta.Pagination.Total <= 1300 {
 		fmt.Println("You have not reached the limit of 1300")
