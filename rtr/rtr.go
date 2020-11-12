@@ -155,13 +155,15 @@ func ScriptRun() {
 	}
 
 	jsonData, err := json.Marshal(payload)
+	jsonData, err := json.Marshal(payload)
 	if err != nil {
 		log.Println(err)
 	}
+	fmt.Println(string(jsonData))
 
 	req, err := http.NewRequest("POST", BaseURL+cmdSend, bytes.NewBuffer(jsonData))
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Authorization", " Bearer <token>")
+	req.Header.Set("Authorization", " Bearer "+api.OauthToken)
 	req.Header.Set("Content-Type", "application/json")
 	if err != nil {
 		log.Println(err)
@@ -178,8 +180,10 @@ func ScriptRun() {
 	fmt.Println(string(body))
 
 	if resp.StatusCode == 201 {
-		fmt.Println("[+] cmd successfully sent.")
+		fmt.Println("[+] cmd successfully sent, exiting")
+		os.Exit(2)
 	} else {
 		fmt.Println("[!] There was an error running the cmd")
+		os.Exit(2)
 	}
 }
