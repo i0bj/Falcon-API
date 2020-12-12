@@ -139,9 +139,12 @@ func ScriptRun() {
 	var baseCMD, cmdstr string
 	fmt.Println("Enter the Base command to run: ex run, put, runscript..")
 	fmt.Scanln(&baseCMD)
-
+	
+	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("Enter the commad string ex:  'c:\\temp\\someDirectory\\msiexec.exe' -CommandLine='/i c:\\test.msi'")
-	fmt.Scanln(&cmdstr)
+	scanner.Scan()
+	cmdstr = scanner.Text()
+	
 	URLValue := url.Values{}
 
 	URLValue.Set("timeout", "30")
