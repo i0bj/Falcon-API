@@ -162,8 +162,7 @@ func ScriptRun() {
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Println(string(jsonData))
-
+	
 	req, err := http.NewRequest("POST", BaseURL+cmdSend, bytes.NewBuffer(jsonData))
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Authorization", " Bearer "+api.OauthToken)
