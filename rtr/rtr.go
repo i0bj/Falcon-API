@@ -179,9 +179,7 @@ func ScriptRun() {
 	}
 	defer resp.Body.Close()
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println(string(body))
-
+	
 	if resp.StatusCode == 201 {
 		fmt.Println("[+] cmd successfully sent, exiting")
 		os.Exit(2)
