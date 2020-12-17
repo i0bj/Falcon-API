@@ -88,7 +88,10 @@ func menu() {
 				api.AccessToken()
 				fmt.Println("An Oauth2 token has been created and saved.")
 			} else {
-				fmt.Println("Exiting Falcon...")
+				for i := 0; i < 30; i++ {
+					time.Sleep(50 * time.Millisecond)
+					rtr.ProgressBar(i+1, 30, "Exiting Falcon..", 10, "=")
+				}
 				os.Exit(0)
 			}
 		case 3:
@@ -104,13 +107,25 @@ func menu() {
 				fmt.Println("Enter Host: ")
 				fmt.Scanln(&HIDS)
 				api.FindInfo(api.FindHost(HIDS)) //TODO clean up, have the function return to menu possibly as opposed to asking for another hostname.
-			} else if ret == "no" {
+			} else {
 				menu()
 
 			}
 
 		case 4:
 			rtr.StartSession()
+			var answer string
+			fmt.Println("\nReturn To Menu? ")
+			fmt.Scan(&answer)
+			if answer == "yes" {
+				menu()
+			} else {
+				for i := 0; i < 30; i++ {
+					time.Sleep(50 * time.Millisecond)
+					rtr.ProgressBar(i+1, 30, "Exiting Falcon..", 10, "=")
+				}
+				os.Exit(2)
+			}
 		case 5:
 			//batch session ID
 			var batchID string
