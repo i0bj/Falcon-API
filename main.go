@@ -132,6 +132,18 @@ func menu() {
 			fmt.Println("Please enter the Batch ID: ")
 			fmt.Scanln(&batchID)
 			rtr.ScriptRun(batchID)
+			var answer string
+			fmt.Println("\nReturn To Menu? ")
+			fmt.Scan(&answer)
+			if answer == "yes" {
+				menu()
+			} else {
+				for i := 0; i < 30; i++ {
+					time.Sleep(50 * time.Millisecond)
+					rtr.ProgressBar(i+1, 30, "Exiting Falcon..", 10, "=")
+				}
+				os.Exit(2)
+			}
 		
 		case 6:
 			fmt.Println("[!] After Entering Hosts Press CTRL + Z, Then Enter.")
@@ -142,10 +154,16 @@ func menu() {
 			if answer == "yes" {
 				api.DeleteHosts()
 			} else {
-				os.Exit(1)
-			}
+				for i := 0; i < 30; i++ {
+					time.Sleep(50 * time.Millisecond)
+					rtr.ProgressBar(i+1, 30, "Exiting Falcon..", 10, "=")
+				}
+				os.Exit(2)
 		case 7:
-			fmt.Println("Exiting Falcon...")
+			for i := 0; i < 30; i++ {
+				time.Sleep(50 * time.Millisecond)
+				rtr.ProgressBar(i+1, 30, "Exiting Falcon..", 10, "=")
+			}
 			os.Exit(0)
 		}
 	}
