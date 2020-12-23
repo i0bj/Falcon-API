@@ -10,6 +10,7 @@ import (
 	"time"
 	
 	"golang.org/x/crypto/bcrypt"
+	"golang.org/x/term"
 )
 
 func title() {
@@ -183,8 +184,7 @@ func main() {
 	var usr, pswd string
 	fmt.Println("Enter Username: ")
 	fmt.Scanln(&usr)
-	fmt.Println("Enter Password: ")
-	fmt.Scanln(&pswd)
+	
 	
         // When using Bcrypt you cannot compare hash values because bcrypt generates a 128 bit salt that is part of the generated hash.
 	// You will need to compare the bcrypt hash with the input from the user.
