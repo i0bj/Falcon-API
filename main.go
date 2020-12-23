@@ -181,9 +181,16 @@ func main() {
 	fmt.Println("You must have explicit, authorized permission to access this application. \nUnauthorized attempts to access or use this app may result in criminal penalties.")
 	fmt.Println("------------------------------------------------------------------------------------------|")
 
-	var usr, pswd string
+	var usr string
+
 	fmt.Println("Enter Username: ")
 	fmt.Scanln(&usr)
+	fmt.Println("Enter Password: ")
+	pswd, err := term.ReadPassword(int(os.Stdin.Fd()))
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Scan("\n", &pswd)
 	
 	
         // When using Bcrypt you cannot compare hash values because bcrypt generates a 128 bit salt that is part of the generated hash.
