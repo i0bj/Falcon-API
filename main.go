@@ -106,8 +106,9 @@ func menu() {
 			if ret == "yes" {
 				var HIDS string
 				fmt.Println("Enter Host: ")
-				fmt.Scanln(&HIDS)
-				api.FindInfo(api.FindHost(HIDS)) //TODO clean up, have the function return to menu possibly as opposed to asking for another hostname.
+				fmt.Scan(&HIDS)
+				api.FindInfo(api.FindHost(HIDS))
+				fmt.Println("\n\nPress CTRL + c to exit application.") //TODO clean up, have the function return to menu possibly as opposed to asking for another hostname.
 			} else {
 				menu()
 
