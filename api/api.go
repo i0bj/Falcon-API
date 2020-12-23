@@ -178,11 +178,9 @@ func LicenseTotal(q string)  {
 
 //FindHost will fetch the HID/AID using the provided query.
 func FindHost(HIDS string) []string {
-	// Have to hit enter 2x
-	fmt.Scanln(&HIDS)
+	fmt.Scan("\n", &HIDS)
 
 	params := url.Values{}
-
 	params.Add("filter", fmt.Sprintf("hostname: '%s'", HIDS))
 
 	req, err := http.NewRequest("GET", BaseURL+FindAID+params.Encode(), nil)
